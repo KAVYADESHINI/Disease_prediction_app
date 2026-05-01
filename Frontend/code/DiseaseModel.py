@@ -1,6 +1,8 @@
 import xgboost as xgb
 import pandas as pd
-
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, '..', 'data')
 class DiseaseModel:
 
     def __init__(self):
@@ -8,7 +10,7 @@ class DiseaseModel:
         self.symptoms = None
         self.pred_disease = None
         self.model = xgb.XGBClassifier()
-        self.diseases = self.disease_list('data/dataset.csv')
+        self.diseases = self.disease_list('os.path.join(DATA_DIR, 'dataset.csv'))
 
     def load_xgboost(self, model_path):
         self.model.load_model(model_path)
@@ -63,7 +65,7 @@ class DiseaseModel:
 
     def disease_list(self, kaggle_dataset):
 
-        df = pd.read_csv('data/clean_dataset.tsv', sep='\t')
+        df = pd.read_csv(os.path.join(DATA_DIR, 'clean_dataset.tsv'), sep='\t')
         # Preprocessing
         y_data = df.iloc[:,-1]
         X_data = df.iloc[:,:-1]
