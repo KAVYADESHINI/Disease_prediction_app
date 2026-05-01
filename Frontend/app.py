@@ -1,7 +1,5 @@
 """
 Multiple Disease Prediction System
-Rewritten for clarity, correctness, and stronger CV presentation.
-Author: Kavya Deshini
 """
  
 import os
@@ -14,6 +12,8 @@ from PIL import Image
 from streamlit_option_menu import option_menu
 from code.DiseaseModel import DiseaseModel
 from code.helper import prepare_symptoms_array
+import os
+FRONTEND_DIR = os.path.dirname(os.path.abspath(__file__))
  
 # ─────────────────────────────────────────────
 # PAGE CONFIG
@@ -285,7 +285,10 @@ elif selected == "General Disease":
     st.markdown("Select your symptoms below. The XGBoost model will predict the most likely disease.")
  
     disease_model = DiseaseModel()
-    disease_model.load_xgboost("model/xgboost_model.json")
+    # CORRECT
+import os
+FRONTEND_DIR = os.path.dirname(os.path.abspath(__file__))
+disease_model.load_xgboost(os.path.join(FRONTEND_DIR, "model", "xgboost_model.json"))
  
     symptoms = st.multiselect("Select your symptoms:", options=disease_model.all_symptoms)
  
