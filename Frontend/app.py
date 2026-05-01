@@ -297,6 +297,7 @@ elif selected == "General Disease":
             st.warning("Please select at least one symptom.")
         else:
             X = prepare_symptoms_array(symptoms)
+            prediction = disease_model.predict(X)
             prediction, prob = disease_model.predict(X)
  
             col1, col2 = st.columns([1, 2])
