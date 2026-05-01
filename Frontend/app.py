@@ -299,13 +299,13 @@ elif selected == "General Disease":
  
             col1, col2 = st.columns([1, 2])
             with col1:
-                show_risk_gauge(prob, "Prediction Confidence")
+                show_risk_gauge(float(prob[0].max()), "Prediction Confidence")
             with col2:
                 st.markdown(f"""
                 <div class="result-positive">
                     <h4>🔍 Predicted Disease</h4>
                     <h2>{prediction}</h2>
-                    <p>Confidence: <strong>{prob*100:.1f}%</strong></p>
+                    <p>Confidence: <strong>{float(prob[0].max())*100:.1f}%</strong></p>
                 </div>""", unsafe_allow_html=True)
  
             tab1, tab2 = st.tabs(["📋 Description", "🛡️ Precautions"])
