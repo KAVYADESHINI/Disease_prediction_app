@@ -12,6 +12,10 @@ class DiseaseModel:
         self.pred_disease = None
         self.model = xgb.XGBClassifier()
         self.diseases = self.disease_list(os.path.join(DATA_DIR, 'dataset.csv'))
+    def predict(self, X):
+       prediction = self.model.predict(X)
+       prob = self.model.predict_proba(X)
+       return prediction, prob    
 
     def load_xgboost(self, model_path):
         self.model.load_model(model_path)
