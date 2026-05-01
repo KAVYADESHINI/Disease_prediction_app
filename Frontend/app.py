@@ -14,7 +14,6 @@ from code.DiseaseModel import DiseaseModel
 from code.helper import prepare_symptoms_array
 import os
 FRONTEND_DIR = os.path.dirname(os.path.abspath(__file__))
- 
 # ─────────────────────────────────────────────
 # PAGE CONFIG
 # ─────────────────────────────────────────────
@@ -286,8 +285,7 @@ elif selected == "General Disease":
  
     disease_model = DiseaseModel()
     # CORRECT
-    import os
-    FRONTEND_DIR = os.path.dirname(os.path.abspath(__file__))
+    
     disease_model.load_xgboost(os.path.join(FRONTEND_DIR, "model", "xgboost_model.json"))
  
     symptoms = st.multiselect("Select your symptoms:", options=disease_model.all_symptoms)
