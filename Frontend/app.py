@@ -12,7 +12,8 @@ from PIL import Image
 from streamlit_option_menu import option_menu
 from code.DiseaseModel import DiseaseModel
 from code.helper import prepare_symptoms_array
- 
+import os
+FRONTEND_DIR = os.path.dirname(os.path.abspath(__file__))
 # ─────────────────────────────────────────────
 # PAGE CONFIG
 # ─────────────────────────────────────────────
@@ -283,7 +284,9 @@ elif selected == "General Disease":
     st.markdown("Select your symptoms below. The XGBoost model will predict the most likely disease.")
  
     disease_model = DiseaseModel()
-    disease_model.load_xgboost("model/xgboost_model.json")
+    # CORRECT
+    
+    disease_model.load_xgboost(os.path.join(FRONTEND_DIR, "model", "xgboost_model.json"))
  
     symptoms = st.multiselect("Select your symptoms:", options=disease_model.all_symptoms)
  
@@ -296,13 +299,13 @@ elif selected == "General Disease":
  
             col1, col2 = st.columns([1, 2])
             with col1:
-                show_risk_gauge(prob, "Prediction Confidence")
+                show_risk_gauge(float(prob[0].max()), "Prediction Confidence")
             with col2:
                 st.markdown(f"""
                 <div class="result-positive">
                     <h4>🔍 Predicted Disease</h4>
                     <h2>{prediction}</h2>
-                    <p>Confidence: <strong>{prob*100:.1f}%</strong></p>
+                    <p>Confidence: <strong>{float(prob[0].max())*100:.1f}%</strong></p>
                 </div>""", unsafe_allow_html=True)
  
             tab1, tab2 = st.tabs(["📋 Description", "🛡️ Precautions"])
