@@ -1,7 +1,5 @@
 """
 Multiple Disease Prediction System
-Rewritten for clarity, correctness, and stronger CV presentation.
-Author: Kavya Deshini
 """
  
 import os
